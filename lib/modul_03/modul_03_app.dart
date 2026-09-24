@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
 
-import 'modul_03/screens/krs_list_screen.dart';
+import 'screens/krs_list_screen.dart';
 
-void main() {
-  runApp(const PoliwangiProfileApp());
-}
-
-class PoliwangiProfileApp extends StatelessWidget {
-  const PoliwangiProfileApp({super.key});
+class Modul03App extends StatelessWidget {
+  const Modul03App({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Profil Mahasiswa TRPL & KRS',
+      title: 'Modul 03 — Navigasi Dasar & Form',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0284C7)),
         useMaterial3: true,
       ),
-      // Ganti home ke KrsListScreen agar fitur KRS Modul 3 yang muncul
       home: const KrsListScreen(),
     );
   }
