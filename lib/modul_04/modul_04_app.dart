@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'screens/announcement_list_screen.dart';
+import 'services/announcement_api.dart';
+
+/// `true` bila dijalankan dengan `--dart-define=SIMULASI=true`.
+const bool kModeSimulasi = bool.fromEnvironment('SIMULASI');
 
 class Modul04App extends StatelessWidget {
   const Modul04App({super.key});
@@ -14,7 +18,9 @@ class Modul04App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0284C7)),
         useMaterial3: true,
       ),
-      home: const AnnouncementListScreen(),
+      home: AnnouncementListScreen(
+        api: AnnouncementApi(modeSimulasi: kModeSimulasi),
+      ),
     );
   }
 }

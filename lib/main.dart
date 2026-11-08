@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'modul_04/modul_04_app.dart';
+import 'pengayaan/modul_07/modul_07_app.dart';
+import 'pengayaan/modul_07/modul_07_pengayaan_app.dart';
 
 void main() {
-  runApp(const Modul04App());
+  runApp(const Modul07PengayaanApp());
+  runApp(const Modul07App());
 }

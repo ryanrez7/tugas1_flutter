@@ -59,8 +59,9 @@ class _AddKrsScreenState extends State<AddKrsScreen> {
                 validator: (value) {
                   final teks = value?.trim() ?? '';
                   if (teks.isEmpty) return 'Kode mata kuliah wajib diisi';
-                  if (teks.length < 4)
+                  if (teks.length < 4) {
                     return 'Kode minimal terdiri dari 4 karakter';
+                  }
                   return null;
                 },
               ),
@@ -102,8 +103,9 @@ class _AddKrsScreenState extends State<AddKrsScreen> {
                   final teks = value?.trim() ?? '';
                   if (teks.isEmpty) return 'SKS wajib diisi';
                   final sks = int.tryParse(teks);
-                  if (sks == null || sks <= 0)
+                  if (sks == null || sks <= 0) {
                     return 'SKS harus berupa angka positif';
+                  }
                   return null;
                 },
               ),

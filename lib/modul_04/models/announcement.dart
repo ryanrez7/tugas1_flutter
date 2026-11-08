@@ -1,4 +1,12 @@
 class Announcement {
+  final int id;
+  final String title;
+  final String content;
+  final String author;
+  final String category;
+  final String date;
+  final int readCount;
+
   const Announcement({
     required this.id,
     required this.title,
@@ -9,25 +17,15 @@ class Announcement {
     required this.readCount,
   });
 
-  final int id;
-  final String title;
-  final String content;
-  final String author;
-  final String category;
-  final String date;
-  final int readCount;
-
   factory Announcement.fromJson(Map<String, dynamic> json) {
     return Announcement(
-      id: json['id'] is int
-          ? json['id'] as int
-          : int.tryParse(json['id'].toString()) ?? 0,
-      title: json['title'] as String? ?? 'Tanpa Judul',
-      content: json['content'] as String? ?? json['body'] as String? ?? '',
-      author: json['author'] as String? ?? 'Bagian Akademik Poliwangi',
-      category: json['category'] as String? ?? 'Akademik',
-      date: json['date'] as String? ?? '2026-09-01',
-      readCount: json['readCount'] is int ? json['readCount'] as int : 0,
+      id: json['id'] as int,
+      title: json['title'] as String,
+      content: json['content'] as String,
+      author: json['author'] as String,
+      category: json['category'] as String,
+      date: json['date'] as String,
+      readCount: json['readCount'] as int,
     );
   }
 
@@ -35,21 +33,21 @@ class Announcement {
     return const [
       Announcement(
         id: 1,
-        title: 'Jadwal Daftar Ulang Semester Ganjil 2026/2027',
-        content: 'Seluruh mahasiswa diharapkan menyelesaikan pembayaran UKT.',
+        title: 'Pendaftaran Beasiswa PPA 2026 Dibuka',
+        content: 'Mahasiswa aktif dapat mendaftar beasiswa PPA mulai minggu ini.',
         author: 'Bagian Akademik Poliwangi',
-        category: 'Akademik',
+        category: 'Beasiswa',
         date: '2026-09-01',
         readCount: 120,
       ),
       Announcement(
         id: 2,
-        title: 'Pendaftaran Beasiswa Prestasi D3 & D4',
-        content: 'Pembukaan pendaftaran beasiswa prestasi dibuka hingga akhir bulan.',
-        author: 'Kemahasiswaan Poliwangi',
-        category: 'Beasiswa',
-        date: '2026-09-02',
-        readCount: 85,
+        title: 'Jadwal UTS Semester Ganjil',
+        content: 'Jadwal Ujian Tengah Semester telah dirilis, cek di portal akademik.',
+        author: 'Bagian Akademik Poliwangi',
+        category: 'Akademik',
+        date: '2026-09-05',
+        readCount: 89,
       ),
     ];
   }

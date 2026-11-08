@@ -1,0 +1,107 @@
+class SesiPengguna{
+  final String token;
+  final String email;
+  final String nama;
+  final String peran;
+  final String masukPada;
+  final String kadaluwarsaPada;
+
+  const SesiPengguna({
+    required this.token,
+    required this.email,
+    required this.nama,
+    required this.peran,
+    required this.masukPada,
+    required this.kadaluwarsaPada,
+  });
+
+  factory SesiPengguna.fromJson(Map<String, dynamic> json){
+    return SesiPengguna(
+      token: json['token'] as String? ?? '',
+      email: json['email'] as String? ?? 'tanpa-email',
+      nama: json['nama'] as String? ?? 'Pengguna',
+      peran: json['peran'] as String? ?? 'mahasiswa',
+      masukPada:
+         json['masukPada'] as String? ?? '1970-01-01T00:00:00.000',
+      kadaluwarsaPada:
+          json['kadaluwarsaPada'] as String? ?? '1970-01-01T00:00:00.000',
+    );
+  }
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'token': token,
+    'email': email,
+    'nama': nama,
+    'peran': peran,
+    'masukPada': masukPada,
+    'kadaluwarsaPada': kadaluwarsaPada,
+  };
+
+  Duration sisaWaktu(DateTime sekarang){
+    final DateTime? batas = DateTime.tryParse(kadaluwarsaPada);
+    if (batas == null) return Duration.zero;
+    final Duration sisa = batas.difference(sekarang);
+    return sisa.isNegative ? Duration.zero : sisa;  
+  }
+
+  SesiPengguna copyWith({
+    String? token,
+    String? email,
+    String? nama,
+    String? peran,
+    String? masukPada,
+    String? kadaluwarsaPada,
+  }){
+    return SesiPengguna(
+      token: token ?? this.token,
+      email: email ?? this.email,
+      nama: nama ?? this.nama,
+      peran: peran ?? this.peran,
+      masukPada: masukPada ?? this.masukPada,
+      kadaluwarsaPada: kadaluwarsaPada ?? this.kadaluwarsaPada,
+    );
+  }
+
+  static String labelPeran(String peran){
+    switch (peran){
+      case 'dosen':
+        return 'Dosen';
+      case 'mahasiswa':
+        return 'Mahasiswa';
+      default:
+        return 'Pengguna';
+    }
+  }
+
+  bool sudahKadaluwarsa(DateTime sekarang){
+    final DateTime? batas = DateTime.tryParse(kadaluwarsaPada);
+    if (batas == null) return true;
+    return !sekarang.isBefore(batas);
+  }
+
+  bool get kadaluwarsa => sudahKadaluwarsa(DateTime.now());
+
+  static SesiPengguna contoh({
+    String token = 'dummy-token-fase-a',
+    String email = 'student@trpl.test',
+    String nama = 'Mahasiswa TRPL',
+    String peran = 'mahasiswa',
+    Duration masaBerlaku = const Duration(hours: 2),
+    DateTime? sekarang,
+  }){
+    final DateTime mulai = sekarang ?? DateTime(2026, 9, 21, 8, 0);
+    return SesiPengguna(
+      token: token,
+      email: email,
+      nama: nama,
+      peran: peran,
+      masukPada: mulai.toIso8601String(),
+      kadaluwarsaPada: mulai.add(masaBerlaku).toIso8601String(),
+    );
+  }
+
+  @override
+  String toString() =>
+  'SesiPengguna(email: $email, peran: $peran, '
+  'kadaluwarsaPada: $kadaluwarsaPada)';
+}

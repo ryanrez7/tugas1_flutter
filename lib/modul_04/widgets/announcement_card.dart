@@ -27,7 +27,8 @@ class AnnouncementCard extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
+              // Tag kategori di kiri, tanggal di kanan.
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -37,29 +38,57 @@ class AnnouncementCard extends StatelessWidget {
                     labelStyle: TextStyle(
                       color: warna.onPrimaryContainer,
                       fontSize: 12,
+                      fontWeight: FontWeight.w600,
                     ),
-                    padding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   Text(
                     announcement.date,
-                    style: TextStyle(color: warna.outline, fontSize: 12),
+                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
+
+              // Judul pengumuman.
               Text(
                 announcement.title,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 6),
+
+              // Cuplikan isi pengumuman.
               Text(
                 announcement.content,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: warna.onSurfaceVariant),
+                style: TextStyle(color: Colors.grey[700], height: 1.4),
+              ),
+              const SizedBox(height: 12),
+
+              // Baris meta: penulis & jumlah pembaca.
+              Row(
+                children: [
+                  Icon(Icons.person_outline, size: 14, color: Colors.grey[600]),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      announcement.author,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Icon(Icons.visibility_outlined, size: 14, color: Colors.grey[600]),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${announcement.readCount}',
+                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  ),
+                ],
               ),
             ],
           ),
